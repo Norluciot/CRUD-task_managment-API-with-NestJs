@@ -19,6 +19,12 @@ export class TasksService {
     return this.taskRepository.save(newTask);
   }
 
+  async updateStatus(id: number, status: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ where: { id } });
+    task.status = status;
+    return this.taskRepository.save(task);
+  }
+
   async remove(id: number): Promise<void> {
     await this.taskRepository.delete(id);
   }
